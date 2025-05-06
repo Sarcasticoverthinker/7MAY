@@ -7,9 +7,9 @@ import ReactSound from 'react-sound'; // Import sound effects
 
 const messages = [
   "Hello Khadijah,",
-  "It's Your Special Day, Yeyey!",
-  "I had to make something unforgettable for you, because you are so special to me!",
-  "Do you want to see what I've created just for you?"
+  "Mam, It's Your Special Day, hehehe!",
+  “Because you hold such a special place in my heart, I had to make something truly memorable for you.”,
+  "Do you want to see what I made just for you? 💕💕"
 ];
 
 const BirthdayGreeting = () => {
@@ -46,7 +46,7 @@ const BirthdayGreeting = () => {
   const handleNoButtonClick = () => {
     setShowButtons(false);
     setTimeout(() => {
-      alert("Nah, Dekhna to padega Mam lol"); // Display funny message
+      alert("Nah, Dekhna to padega Mam lol, Itni mehnat se banaya hai 🙄😭💕"); // Display funny message
       handleYesButtonClick(); // Proceed to the surprise
     }, 500);
   };
