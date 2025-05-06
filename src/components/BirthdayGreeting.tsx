@@ -7,10 +7,10 @@ import ReactSound from 'react-sound'; // Import sound effects
 
 const messages = [
   "Hello Khadijah,",
-  "My adorably grumpy sour cow",
-  "And the prettiest ma'am alive",
-  "It's Your Special Day, hehehe!",
-  “Because you hold such a special place in my heart, I had to make something truly memorable for you.”,
+  "My adorably grumpy sour cow,",
+  "And the prettiest ma'am alive,",
+  "It's Your Special Day, hehehe!,",
+  “Because you hold such a special place in my heart, I had to make something truly memorable for you.,",
   "Do you want to see what I made just for you? 💕💕"
 ];
 
