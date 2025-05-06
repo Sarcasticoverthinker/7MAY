@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Sparkles } from 'lucide-react';
+import Confetti from 'react-confetti';
+import ReactSound from 'react-sound'; // Import sound effects
 
 const messages = [
-  "Hello Madam Jiiii",
-  "It's Your Special Day Yeyey!",
-  "So, i had to make something special for you cause you are special to me!",
-  "Do you wanna see what I made??"
+  "Hello Khadijah,",
+  "It's Your Special Day, Yeyey!",
+  "I had to make something unforgettable for you, because you are so special to me!",
+  "Do you want to see what I've created just for you?"
 ];
 
 const BirthdayGreeting = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [showButtons, setShowButtons] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false); // Confetti state
+  const [soundPlaying, setSoundPlaying] = useState(false); // For playing sound effects
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,13 +36,21 @@ const BirthdayGreeting = () => {
   const handleButtonClick = () => {
     setShowButtons(false);
     setShowFinalMessage(true);
+    setShowConfetti(true); // Trigger confetti
+    setSoundPlaying(true); // Play sound on button click
     setTimeout(() => {
       navigate('/surprise');
     }, 3000);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-700 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+      {showConfetti && (
+        <Confetti
+          colors={['#9b4dca', '#7a3f9f', '#c084fc', '#d4d1e3']} // Purple-themed confetti
+        />
+      )}
+
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -48,15 +60,15 @@ const BirthdayGreeting = () => {
             animate={{
               y: '-10vh',
               x: Math.random() * 100 + 'vw',
-              rotate: 360
+              rotate: 360,
             }}
             transition={{
               duration: Math.random() * 10 + 10,
               repeat: Infinity,
-              ease: 'linear'
+              ease: 'linear',
             }}
           >
-            <Heart className="text-pink-300" size={24} />
+            <Heart className="text-purple-300" size={24} />
           </motion.div>
         ))}
       </div>
@@ -72,19 +84,17 @@ const BirthdayGreeting = () => {
               transition={{ duration: 1, ease: 'easeInOut' }}
               className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center"
             >
-              <Sparkles className="inline-block text-yellow-400 mb-4" size={32} />
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentMessageIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                  className="text-2xl font-semibold text-gray-800 mb-6"
-                >
-                  {messages[currentMessageIndex]}
-                </motion.p>
-              </AnimatePresence>
+              <Sparkles className="inline-block text-purple-400 mb-4" size={32} />
+              <motion.p
+                key={currentMessageIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.8, ease: 'easeInOut' }}
+                className="text-2xl font-semibold text-purple-800 mb-6"
+              >
+                {messages[currentMessageIndex]}
+              </motion.p>
 
               {showButtons && (
                 <motion.div
@@ -93,18 +103,22 @@ const BirthdayGreeting = () => {
                   transition={{ duration: 0.6, ease: 'easeInOut' }}
                   className="space-x-4"
                 >
-                  <button
+                  <motion.button
                     onClick={handleButtonClick}
-                    className="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transform hover:scale-105 transition-all"
+                    className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-110 transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    Yes!
-                  </button>
-                  <button
+                    Yes! Show me!
+                  </motion.button>
+                  <motion.button
                     onClick={handleButtonClick}
-                    className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-105 transition-all"
+                    className="px-6 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transform hover:scale-110 transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    No
-                  </button>
+                    I'm curious, reveal it!
+                  </motion.button>
                 </motion.div>
               )}
             </motion.div>
@@ -116,13 +130,22 @@ const BirthdayGreeting = () => {
               transition={{ duration: 1, ease: 'easeInOut' }}
               className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center"
             >
-              <p className="text-2xl font-semibold text-gray-800">
-                Have a look at it, Madam Jiii
-              </p>
+              <motion.p className="text-2xl font-semibold text-purple-700 mb-6">
+                Have a look at it, Khadijah! 🎉✨
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+
+      {/* Sound effect for button click */}
+      {soundPlaying && (
+        <ReactSound
+          url="/sounds/button-click.mp3" // Add path to your sound file here
+          playStatus={ReactSound.status.PLAYING}
+          onFinishedPlaying={() => setSoundPlaying(false)}
+        />
+      )}
     </div>
   );
 };
