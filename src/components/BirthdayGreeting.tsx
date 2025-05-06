@@ -33,7 +33,7 @@ const BirthdayGreeting = () => {
     }
   }, [currentMessageIndex]);
 
-  const handleButtonClick = () => {
+  const handleYesButtonClick = () => {
     setShowButtons(false);
     setShowFinalMessage(true);
     setShowConfetti(true); // Trigger confetti
@@ -41,6 +41,14 @@ const BirthdayGreeting = () => {
     setTimeout(() => {
       navigate('/surprise');
     }, 3000);
+  };
+
+  const handleNoButtonClick = () => {
+    setShowButtons(false);
+    setTimeout(() => {
+      alert("Nah, you will have to see it!"); // Display funny message
+      handleYesButtonClick(); // Proceed to the surprise
+    }, 500);
   };
 
   return (
@@ -104,7 +112,7 @@ const BirthdayGreeting = () => {
                   className="space-x-4"
                 >
                   <motion.button
-                    onClick={handleButtonClick}
+                    onClick={handleYesButtonClick}
                     className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-110 transition-all"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -112,12 +120,12 @@ const BirthdayGreeting = () => {
                     Yes! Show me!
                   </motion.button>
                   <motion.button
-                    onClick={handleButtonClick}
+                    onClick={handleNoButtonClick}
                     className="px-6 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transform hover:scale-110 transition-all"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    I'm curious, reveal it!
+                    No, thank you!
                   </motion.button>
                 </motion.div>
               )}
