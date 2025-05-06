@@ -6,4 +6,9 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  build: {
+    rollupOptions: {
+      external: ['react-confetti'], // Add react-confetti here
+    },
+  },
 });
