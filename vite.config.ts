@@ -3,15 +3,20 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/sarcasticoverthinker.github.io/',
   plugins: [react()],
-  base: '/sarcasticoverthinker.github.io/', // Replace with your GitHub repository name
   build: {
-    outDir: 'dist', // Optional: You can change the output directory if needed
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
-      external: ['react-sound', 'react-confetti'], // Exclude react-sound and react-confetti from the bundle
-    },
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      }
+    }
   },
   optimizeDeps: {
-    exclude: ['lucide-react', 'react-sound', 'react-confetti'], // Exclude unnecessary dependencies
-  },
+    exclude: ['lucide-react', 'react-confetti', 'react-sound'],
+  }
 });
