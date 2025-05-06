@@ -46,7 +46,7 @@ const BirthdayGreeting = () => {
   const handleNoButtonClick = () => {
     setShowButtons(false);
     setTimeout(() => {
-      alert("Nah, you will have to see it!"); // Display funny message
+      alert("Nah, Dekhna to padega Mam lol"); // Display funny message
       handleYesButtonClick(); // Proceed to the surprise
     }, 500);
   };
