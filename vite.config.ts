@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/sarcasticoverthinker.github.io/',  // Add the base path for GitHub Pages
+  base: '/',                              // User site → root
   plugins: [react()],
   build: {
+    outDir: 'dist',
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
@@ -14,4 +14,4 @@ export default defineConfig({
       },
     },
   },
-});
+})
