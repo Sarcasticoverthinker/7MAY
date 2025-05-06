@@ -125,7 +125,7 @@ const BirthdayGreeting = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    No, thank you!
+                    No, thank you! 🙄
                   </motion.button>
                 </motion.div>
               )}
