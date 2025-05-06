@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: './',
+  base: '/sarcasticoverthinker.github.io/',  // Add the repo name here
   plugins: [react()],
   build: {
     outDir: 'dist',
