@@ -12,8 +12,8 @@ const fontStyle = {
 
 const messages = [
   "Hello Khadijah,",
-  "My adorably grumpy sour cow,",
-  "And the prettiest ma'am alive,",
+  "My adorable grumpy sour cow",
+  "And the prettiest ma'am alive",
   "It's your special day, hehehe!",
   "Because you hold such a special place in my heart,",
   "I had to make something truly memorable for you.",
@@ -68,7 +68,7 @@ const BirthdayGreeting = () => {
   const handleNoButtonClick = () => {
     setShowButtons(false);
     setTimeout(() => {
-      alert("Awww come on Mam! You know you want to see it 😘💕");
+      alert("Awww come on Mam! I know you want to see it 😋💕");
       handleYesButtonClick();
     }, 500);
   };
