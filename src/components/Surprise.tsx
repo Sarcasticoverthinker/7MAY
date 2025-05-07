@@ -106,12 +106,12 @@ const Surprise = () => {
 
   // ONLY CHANGED PART: Removed "Cut the Cake!" button from arrays
   const buttonLabels = [
-    "Turn On the Lights",
-    "Play Birthday Music",
-    "Decorate the Room",
-    "Release the Balloons!",
-    "Time for Cake!",
-    "Special Message for Khadijah"
+    "Let's Turn On the Lights",
+    "Let's play music that sounds like you",
+    "Let's Decorate the Room",
+    "Let's Release the Balloons!",
+    "Let's Cut the Cake!",
+    "Touch it only if your name spells K-H-A-D-I-J-A-H!"
   ];
 
   const buttonIcons = [
