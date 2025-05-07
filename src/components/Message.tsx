@@ -6,11 +6,13 @@ const Message = () => {
   const [showSurprise, setShowSurprise] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
   const [showStars, setShowStars] = useState(false);
+  const [showButterflies, setShowButterflies] = useState(false);
 
   const handleButtonClick = () => {
     setShowSurprise(true);
     setShowHearts(true);
     setShowStars(true);
+    setShowButterflies(true);
   };
 
   // Font classes for easy reuse
@@ -36,9 +38,9 @@ const Message = () => {
       <AnimatePresence>  
         {showHearts && (  
           <div className="absolute inset-0 pointer-events-none">  
-            {[...Array(30)].map((_, i) => (  
+            {[...Array(15)].map((_, i) => (  
               <motion.div  
-                key={i}  
+                key={`heart-${i}`}  
                 className="absolute"  
                 initial={{   
                   y: '100vh',   
@@ -69,11 +71,55 @@ const Message = () => {
           </div>  
         )}  
 
+        {showButterflies && (
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(15)].map((_, i) => (
+              <motion.div
+                key={`butterfly-${i}`}
+                className="absolute"
+                initial={{ 
+                  y: '100vh', 
+                  x: Math.random() * 100 + 'vw',
+                  opacity: 0,
+                  rotate: Math.random() * 360
+                }}
+                animate={{
+                  y: '-10vh',
+                  x: Math.random() * 20 - 10 + 'vw',
+                  opacity: [0, 1, 1, 0],
+                  rotate: 360,
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: 'linear',
+                  delay: Math.random() * 5
+                }}
+              >
+                <motion.div
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    y: [0, -5, 0]
+                  }}
+                  transition={{
+                    duration: 1 + Math.random(),
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className={`text-3xl ${i % 2 === 0 ? 'text-purple-400' : 'text-pink-300'}`}
+                >
+                  🦋
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
         {showStars && (
           <div className="absolute inset-0 pointer-events-none">
             {[...Array(50)].map((_, i) => (
               <motion.div
-                key={i}
+                key={`star-${i}`}
                 className="absolute"
                 initial={{
                   y: Math.random() * 100 + 'vh',
@@ -223,6 +269,14 @@ const Message = () => {
               <p className="text-purple-600 italic">
                 May every moment be as beautiful as you are
               </p>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-4 text-4xl"
+              >
+                🦋💜
+              </motion.div>
             </motion.div>  
           )}  
         </AnimatePresence>  
