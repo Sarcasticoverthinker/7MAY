@@ -6,6 +6,8 @@ import { Music, Heart, Sparkles, Gift, Cake, MessageSquare, Scissors } from 'luc
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
 import CatCake from './images/cat-face-cake.jpg';
+import Photo1 from './images/cat-face-cake.jpg';
+import Photo2 from './images/cat-face-cake.jpg';;
 
 const StarryNight = () => {
   const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
