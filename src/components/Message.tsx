@@ -190,7 +190,7 @@ const Message = () => {
           transition={{ duration: 1, delay: 0.5 }}  
           className={`text-xl md:text-2xl italic leading-relaxed mb-8 text-purple-800 ${fonts.elegant}`}  
         >  
-          to the epitome of beauty and grace, unmatched in the entire world, to the woman who illuminates everything with her grace, and whose heart shines brighter than the stars, my purple queen.
+          To the epitome of beauty and grace, unmatched in the entire world, to the woman who illuminates everything with her grace, and whose heart shines brighter than the stars, my purple queen.
         </motion.p>  
 
         <motion.p  
@@ -233,7 +233,7 @@ const Message = () => {
                 className={`mt-6 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-400 hover:from-purple-600 hover:to-pink-500 text-white rounded-full text-lg shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center gap-3 mx-auto ${fonts.body} font-semibold`}  
               >  
                 <Gift size={24} className="text-yellow-200" />  
-                Open Your Heart's Gift  
+                Message from an Idiot  
                 <ChevronDown size={20} className="animate-bounce text-purple-100" />  
               </motion.button>  
             </>  
