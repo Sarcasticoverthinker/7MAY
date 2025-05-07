@@ -104,6 +104,7 @@ const Surprise = () => {
     "Let's play music that sounds like you",
     "Let's Decorate the Room",
     "Let's Release the Balloons!",
+    "Let's Cut the Cake!",
     "Special Message for Khadijah"
   ];
 
@@ -253,11 +254,13 @@ const Surprise = () => {
           className="absolute flex justify-center items-center w-full"
           style={{ top: '50%' }}
         >
-          <img
-            src={CatCake}
-            className="w-48 h-48 md:w-56 md:h-56 rounded-lg shadow-xl border-4 border-white" // Adjusted size
-            alt="Cat Cake"
-          />
+          <div className="relative">
+            <img
+              src={CatCake}
+              className="w-full max-w-xs md:max-w-md h-auto mt-10 pt-10 rounded-lg shadow-xl border-4 border-white"
+              alt="Cat Cake"
+            />
+          </div>
         </motion.div>
       )}
 
