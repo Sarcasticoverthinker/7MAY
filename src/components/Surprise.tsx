@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Music, Heart, Sparkles, Gift, MessageSquare } from 'lucide-react';
+import { Music, Heart, Sparkles, Gift, Cake, MessageSquare } from 'lucide-react';
 
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
 import CatCake from './images/cat-face-cake.jpg';
-import Photo1 from './images/cat-face-cake.jpg';
-import Photo2 from './images/cat-face-cake.jpg';
-import Photo3 from './images/cat-face-cake.jpg';
+import Photo1 from './images/photo1.jpg';
+import Photo2 from './images/photo2.jpg';
 
-// 1. StarryNight - COMPLETE AND UNCHANGED
 const StarryNight = () => {
   const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
 
@@ -56,7 +54,6 @@ const StarryNight = () => {
   );
 };
 
-// 2. FloatingHearts - COMPLETE AND UNCHANGED
 const FloatingHearts = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -103,11 +100,12 @@ const Surprise = () => {
   const navigate = useNavigate();
 
   const buttonLabels = [
-    "Let's Turn On the Lights",
-    "Let's play music that sounds like you",
-    "Let's Decorate the Room",
-    "Let's Release the Balloons!",
-    "💕💕💕"
+    "Turn On the Lights",
+    "Play Birthday Music",
+    "Decorate the Room",
+    "Release the Balloons!",
+    "Time for Cake!",
+    "Special Message for Khadijah"
   ];
 
   const buttonIcons = [
@@ -115,6 +113,7 @@ const Surprise = () => {
     <Music key="music" className="w-4 h-4" />,
     <Gift key="gift" className="w-4 h-4" />,
     <Heart key="heart" className="w-4 h-4" />,
+    <Cake key="cake" className="w-4 h-4" />,
     <MessageSquare key="message" className="w-4 h-4" />
   ];
 
@@ -139,13 +138,9 @@ const Surprise = () => {
     <div className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${
       isLit ? 'bg-gradient-to-br from-purple-50 via-purple-200 to-purple-400' : 'bg-gray-900'
     }`}>
-      {/* STAR FIELD */}
       <StarryNight />
-      
-      {/* FLOATING HEARTS */}
       {isLit && <FloatingHearts />}
 
-      {/* CONFETTI */}
       {showConfetti && (
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(200)].map((_, i) => (
@@ -176,7 +171,6 @@ const Surprise = () => {
         </div>
       )}
 
-      {/* DECORATIVE LIGHTS */}
       {isLit && (
         <div className="absolute top-4 left-0 right-0 flex justify-around">
           {[...Array(8)].map((_, i) => (
@@ -200,7 +194,6 @@ const Surprise = () => {
         </div>
       )}
 
-      {/* BANNER */}
       {stage >= 3 && (
         <motion.div
           initial={{ y: -100, opacity: 0 }}
@@ -216,7 +209,6 @@ const Surprise = () => {
         </motion.div>
       )}
 
-      {/* BALLOONS */}
       {stage >= 4 && (
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(25)].map((_, i) => (
@@ -241,7 +233,6 @@ const Surprise = () => {
                 }}
                 animate={{
                   y: [0, -10, 0],
-                rotate: [0, 5, 0]
                 }}
                 transition={{
                   duration: 2 + Math.random() * 2,
@@ -255,50 +246,55 @@ const Surprise = () => {
         </div>
       )}
 
-      {/* PHOTO GALLERY - NOW WITH 4 CAKE IMAGES */}
+      {stage >= 5 && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="absolute flex justify-center items-center w-full"
+          style={{ top: '50%' }}
+        >
+          <img
+            src={CatCake}
+            className="w-full max-w-xs md:max-w-md h-auto mt-10 pt-10 rounded-lg shadow-xl border-4 border-white"
+            alt="Cat Cake"
+          />
+        </motion.div>
+      )}
+
       {showPhotos && (
         <div className="absolute inset-0 flex justify-center items-center gap-4 pointer-events-none">
           <motion.img
             src={Photo1}
             className="w-24 h-24 md:w-32 md:h-32 rounded-lg shadow-lg border-2 border-white"
-            alt="Cake Photo 1"
-            initial={{ y: 100, opacity: 0, rotate: -15 }}
+            alt="Memory"
+            initial={{ y: 100, opacity: 0, rotate: -10 }}
             animate={{ y: 0, opacity: 1, rotate: -5 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           />
           <motion.img
             src={Photo2}
             className="w-32 h-32 md:w-40 md:h-40 rounded-lg shadow-lg border-2 border-white z-10"
-            alt="Cake Photo 2"
-            initial={{ y: 100, opacity: 0, scale: 0.8 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            alt="Memory"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           />
           <motion.img
-            src={Photo3}
+            src={Photo1}
             className="w-24 h-24 md:w-32 md:h-32 rounded-lg shadow-lg border-2 border-white"
-            alt="Cake Photo 3"
-            initial={{ y: 100, opacity: 0, rotate: 15 }}
+            alt="Memory"
+            initial={{ y: 100, opacity: 0, rotate: 10 }}
             animate={{ y: 0, opacity: 1, rotate: 5 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          />
-          <motion.img
-            src={CatCake}
-            className="w-24 h-24 md:w-32 md:h-32 rounded-lg shadow-lg border-2 border-white"
-            alt="Cake Photo 4"
-            initial={{ y: 100, opacity: 0, scale: 1.2 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           />
         </div>
       )}
 
-      {/* MUSIC PLAYER */}
       <audio ref={audioRef} loop>
         <source src={Musicc} type="audio/mpeg" />
       </audio>
 
-      {/* MUSIC ICON */}
       {stage >= 2 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -309,7 +305,6 @@ const Surprise = () => {
         </motion.div>
       )}
 
-      {/* MAIN BUTTON */}
       <div className="absolute inset-x-0 bottom-10 flex justify-center items-center px-4 py-4">
         <motion.button
           onClick={handleClick}
