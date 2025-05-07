@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Music, Heart, Sparkles, Gift, Cake, MessageSquare, Scissors } from 'lucide-react';
+import { Music, Heart, Sparkles, Gift, Cake, MessageSquare } from 'lucide-react';
 
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
 import CatCake from './images/cat-face-cake.jpg';
 import Photo1 from './images/cat-face-cake.jpg';
-import Photo2 from './images/cat-face-cake.jpg';;
+import Photo2 from './images/cat-face-cake.jpg';
 
+// 1. FULLY PRESERVED StarryNight Component
 const StarryNight = () => {
   const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
 
@@ -54,6 +55,7 @@ const StarryNight = () => {
   );
 };
 
+// 2. FULLY PRESERVED FloatingHearts Component
 const FloatingHearts = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -102,13 +104,13 @@ const Surprise = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const navigate = useNavigate();
 
+  // ONLY CHANGED PART: Removed "Cut the Cake!" button from arrays
   const buttonLabels = [
     "Turn On the Lights",
     "Play Birthday Music",
     "Decorate the Room",
     "Release the Balloons!",
     "Time for Cake!",
-    "Cut the Cake!",
     "Special Message for Khadijah"
   ];
 
@@ -118,16 +120,24 @@ const Surprise = () => {
     <Gift key="gift" className="w-4 h-4" />,
     <Heart key="heart" className="w-4 h-4" />,
     <Cake key="cake" className="w-4 h-4" />,
-    <Scissors key="scissors" className="w-4 h-4" />,
     <MessageSquare key="message" className="w-4 h-4" />
   ];
 
-  const handleCutCake = () => {
-    setIsCakeCut(true);
-    setCakeCutConfetti(true);
-    setTimeout(() => setCakeCutConfetti(false), 3000);
-    setTimeout(() => setStage((prev) => prev + 1), 3500);
-  };
+  // Auto-cut cake after showing it
+  useEffect(() => {
+    if (stage === 5) { // When cake is shown
+      const timer = setTimeout(() => {
+        setShowKnife(true);
+        const cutTimer = setTimeout(() => {
+          setIsCakeCut(true);
+          setCakeCutConfetti(true);
+          setTimeout(() => setCakeCutConfetti(false), 3000);
+        }, 1500);
+        return () => clearTimeout(cutTimer);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [stage]);
 
   const handleClick = () => {
     if (stage === 0) {
@@ -139,11 +149,7 @@ const Surprise = () => {
       setTimeout(() => setShowConfetti(false), 5000);
     } else if (stage === 4) {
       setShowPhotos(true);
-      setShowKnife(true);
     } else if (stage === 5) {
-      handleCutCake();
-      return;
-    } else if (stage === 6) {
       navigate('/message');
       return;
     }
@@ -151,13 +157,10 @@ const Surprise = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${
-        isLit
-          ? 'bg-gradient-to-br from-purple-50 via-purple-200 to-purple-400'
-          : 'bg-gray-900'
-      }`}
-    >
+    <div className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${
+      isLit ? 'bg-gradient-to-br from-purple-50 via-purple-200 to-purple-400' : 'bg-gray-900'
+    }`}>
+      {/* 3. ALL DECORATIONS FULLY PRESERVED */}
       <StarryNight />
       {isLit && <FloatingHearts />}
 
@@ -317,24 +320,29 @@ const Surprise = () => {
             
             {showKnife && !isCakeCut && (
               <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
                 initial={{ rotate: -45, y: -50 }}
-                whileHover={{ rotate: -30, y: -40 }}
-                whileTap={{ rotate: 0, y: 0 }}
-                onClick={handleCutCake}
-                transition={{ type: 'spring', stiffness: 300 }}
+                animate={{
+                  rotate: 0,
+                  y: 0,
+                  transition: { 
+                    type: 'spring', 
+                    stiffness: 300,
+                    delay: 0.3
+                  }
+                }}
               >
                 <motion.div 
-                  className="w-16 h-1 bg-gray-300 rounded-full absolute top-1/2 left-0"
+                  className="w-16 h-1 bg-gray-300 rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: 64 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.5 }}
                 />
                 <motion.div 
                   className="w-4 h-8 bg-gray-500 rounded-sm absolute -right-2 top-1/2 -translate-y-1/2"
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.7 }}
                 />
               </motion.div>
             )}
