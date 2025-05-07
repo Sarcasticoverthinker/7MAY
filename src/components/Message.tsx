@@ -179,7 +179,7 @@ const Message = () => {
         </motion.div>  
 
         <h1 className={`text-4xl md:text-5xl mb-6 tracking-wider text-purple-900 ${fonts.heading}`}>  
-          My Dearest Khadijah,
+          Dear Khadijah,
         </h1>  
 
         <div className="w-20 h-1 mx-auto bg-gradient-to-r from-purple-200 via-purple-400 to-purple-200 rounded-full mb-8" />  
@@ -190,7 +190,7 @@ const Message = () => {
           transition={{ duration: 1, delay: 0.5 }}  
           className={`text-xl md:text-2xl italic leading-relaxed mb-8 text-purple-800 ${fonts.elegant}`}  
         >  
-          To the woman who illuminates every room with her grace, whose laughter is my favorite melody, and whose heart shines brighter than the stars.
+          to the epitome of beauty and grace, unmatched in the entire world, to the woman who illuminates everything with her grace, and whose heart shines brighter than the stars, my purple queen.
         </motion.p>  
 
         <motion.p  
@@ -199,8 +199,8 @@ const Message = () => {
           transition={{ duration: 1, delay: 0.8 }}  
           className="text-lg md:text-xl text-purple-900 leading-relaxed mb-8"  
         >  
-          On this special day, I want you to know how incredibly grateful I am to have you in my life. You are a rare gem - kind, beautiful, and endlessly fascinating. May this year bring you as much joy as you bring to everyone around you.
-        </motion.p>  
+          On this special day, I just want to say I'm so lucky to have met you. I want you to know that how incredibly grateful I am to have you in my life. I pray that your days, weeks, months, and years ahead are filled with barakah, warmth, love, and the kind of happiness that brings peace to your heart.
+          </motion.p>  
 
         <AnimatePresence mode="wait">  
           {!showSurprise ? (  
@@ -211,7 +211,7 @@ const Message = () => {
                 transition={{ duration: 1, delay: 1 }}  
                 className={`text-xl text-purple-800 tracking-wide mb-4 ${fonts.special}`}  
               >  
-                Wishing you the most magical birthday
+                Wishing you the happiest birthday
               </motion.p>  
 
               <motion.p  
@@ -261,13 +261,13 @@ const Message = () => {
                 <Heart className="text-pink-500 mx-auto" size={48} fill="#ec4899" />  
               </motion.div>  
               <p className={`text-2xl text-purple-800 mb-3 ${fonts.special}`}>  
-                For You, My Love
+                Pretty Princess,
               </p>  
               <p className={`text-purple-700 ${fonts.subheading} text-3xl mb-4`}>  
-                Infinite Love & Happiness ✨
+                Khadijah,
               </p>
               <p className="text-purple-600 italic">
-                May every moment be as beautiful as you are
+                This idiot might get on your nerves sometimes, but he never means to hurt you. If he's ever messed up, he's truly sorry. Just know - he cares deeply, and all he ever asks is that you keep talking, keep trusting, and never stop choosing us.
               </p>
               <motion.div
                 initial={{ scale: 0 }}
