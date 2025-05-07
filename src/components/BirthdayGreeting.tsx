@@ -56,7 +56,7 @@ const BirthdayGreeting = () => {
   const handleNoButtonClick = () => {
     setShowButtons(false);
     setTimeout(() => {
-      alert("Nice try, Mam! But you're not getting away that easily! 😏💕");
+      alert("Nice try, Mam! But nah dekhna to padega itni mehnat se banaya hai 😭💕");
       handleYesButtonClick();
     }, 500);
   };
@@ -169,7 +169,7 @@ const BirthdayGreeting = () => {
                     whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(236, 72, 153, 0.4)" }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Gift size={20} /> Absolutely! Show me!
+                    <Gift size={20} /> Yes! Show me!
                   </motion.button>
                   <motion.button
                     onClick={handleNoButtonClick}
@@ -177,7 +177,7 @@ const BirthdayGreeting = () => {
                     whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(109, 40, 217, 0.4)" }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Frown size={20} /> No, I'm too cool for this
+                    <Frown size={20} /> No, thank you! 🙄
                   </motion.button>
                 </motion.div>
               )}
@@ -209,10 +209,10 @@ const BirthdayGreeting = () => {
                 <Heart className="inline-block text-red-500 mb-4" size={48} />
               </motion.div>
               <motion.p className="text-3xl font-bold text-pink-600 mb-6">
-                Get ready for your surprise, my love! 
+                Heheheheheh
               </motion.p>
               <motion.p className="text-xl text-purple-700">
-                You're the best thing that ever happened to me 💖
+                Have a look at it, Mam! 💕💕
               </motion.p>
             </motion.div>
           )}
@@ -236,7 +236,7 @@ const BirthdayGreeting = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
       >
-        Made with 💖 by Your Secret Admirer
+        Made with 💖 by Your Blue Unicorn (Y)
       </motion.div>
     </div>
   );
