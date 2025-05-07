@@ -6,13 +6,12 @@ import Confetti from 'react-confetti';
 import ReactSound from 'react-sound';
 
 const messages = [
-  "My Dearest Khadijah,",
-  "The Queen of Sass with a Heart of Gold,",
-  "The woman who makes my world brighter,",
-  "Today is all about YOU, my love!",
-  "You deserve the world and more,",
-  "So I made something special just for you...",
-  "Ready to see your surprise?"
+  "Hello Khadijah,",
+  "My adorably grumpy sour cow,",
+  "And the prettiest ma'am alive,",
+  "It's your special day, hehehe!",
+  "Because you hold such a special place in my heart, I had to make something truly memorable for you.",
+  "Do you want to see what I made just for you?"
 ];
 
 const BirthdayGreeting = () => {
