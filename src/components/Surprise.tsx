@@ -100,11 +100,10 @@ const Surprise = () => {
   const navigate = useNavigate();
 
   const buttonLabels = [
-    "Turn On the Lights",
-    "Play Birthday Music",
-    "Decorate the Room",
-    "Release the Balloons!",
-    "Time for Cake!",
+    "Let's Turn On the Lights",
+    "Let's play music that sounds like you",
+    "Let's Decorate the Room",
+    "Let's Release the Balloons!",
     "Special Message for Khadijah"
   ];
 
@@ -256,7 +255,7 @@ const Surprise = () => {
         >
           <img
             src={CatCake}
-            className="w-full max-w-xs md:max-w-md h-auto mt-10 pt-10 rounded-lg shadow-xl border-4 border-white"
+            className="w-48 h-48 md:w-56 md:h-56 rounded-lg shadow-xl border-4 border-white" // Adjusted size
             alt="Cat Cake"
           />
         </motion.div>
