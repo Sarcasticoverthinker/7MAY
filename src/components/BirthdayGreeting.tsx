@@ -289,7 +289,7 @@ const BirthdayGreeting = () => {
         transition={{ delay: 3 }}
         style={{ fontFamily: "'Dancing Script', cursive" }}
       >
-        Made with love by Your Blue Unicorn 💙🦄
+        Made with love by Your Blue Unicorn & someone whose name you already know
       </motion.div>
     </div>
   );
