@@ -196,7 +196,7 @@ const BirthdayGreeting = () => {
                     whileTap={{ scale: 0.95 }}
                     style={fontStyle}
                   >
-                    <Gift size={24} /> Yes please! 💝
+                    <Gift size={24} /> Yes please! 💝💕
                   </motion.button>
                   <motion.button
                     onClick={handleNoButtonClick}
@@ -264,7 +264,7 @@ const BirthdayGreeting = () => {
                 className="text-2xl text-purple-700"
                 style={{ fontFamily: "'Great Vibes', cursive" }}
               >
-                Have a look at it, Mam! 💕💕
+                Have a look at it, Mam! 💕💕💕
               </motion.p>
             </motion.div>
           )}
