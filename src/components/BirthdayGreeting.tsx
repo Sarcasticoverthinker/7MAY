@@ -265,7 +265,6 @@ const BirthdayGreeting = () => {
                 style={{ fontFamily: "'Great Vibes', cursive" }}
               >
                 Have a look at it, Mam! 💕💕
-                className="text-2xl text-purple-700"
               </motion.p>
             </motion.div>
           )}
