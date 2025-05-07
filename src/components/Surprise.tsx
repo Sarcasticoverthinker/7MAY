@@ -111,7 +111,7 @@ const Surprise = () => {
     "Let's Decorate the Room",
     "Let's Release the Balloons!",
     "Let's Cut the Cake!",
-    "Touch it only if your name spells K-H-A-D-I-J-A-H!"
+    "💕💕💕"
   ];
 
   const buttonIcons = [
