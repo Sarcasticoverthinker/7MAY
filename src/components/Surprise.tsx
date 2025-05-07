@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Music, Heart, Sparkles, Gift, Cake, MessageSquare } from 'lucide-react';
+import { Music, Heart, Sparkles, Gift, MessageSquare } from 'lucide-react';
 
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
-import CatCake from './images/cat-face-cake.jpg';
 import Photo1 from './images/cat-face-cake.jpg';
 import Photo2 from './images/cat-face-cake.jpg';
 
-// StarryNight component remains exactly the same
+// 1. StarryNight - COMPLETELY INTACT
 const StarryNight = () => {
   const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
 
@@ -55,7 +54,7 @@ const StarryNight = () => {
   );
 };
 
-// FloatingHearts component remains exactly the same
+// 2. FloatingHearts - COMPLETELY INTACT
 const FloatingHearts = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -98,17 +97,15 @@ const Surprise = () => {
   const [isLit, setIsLit] = useState(false);
   const [showPhotos, setShowPhotos] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [isCakeCut, setIsCakeCut] = useState(false);
-  const [cakeCutConfetti, setCakeCutConfetti] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const navigate = useNavigate();
 
+  // Updated button labels (removed cake reference)
   const buttonLabels = [
     "Let's Turn On the Lights",
     "Let's play music that sounds like you",
     "Let's Decorate the Room",
     "Let's Release the Balloons!",
-    "Let's Cut the Cake!",
     "💕💕💕"
   ];
 
@@ -117,21 +114,8 @@ const Surprise = () => {
     <Music key="music" className="w-4 h-4" />,
     <Gift key="gift" className="w-4 h-4" />,
     <Heart key="heart" className="w-4 h-4" />,
-    <Cake key="cake" className="w-4 h-4" />,
     <MessageSquare key="message" className="w-4 h-4" />
   ];
-
-  // Auto-cut cake (simplified - no knife animation)
-  useEffect(() => {
-    if (stage === 5) { 
-      const timer = setTimeout(() => {
-        setIsCakeCut(true);
-        setCakeCutConfetti(true);
-        setTimeout(() => setCakeCutConfetti(false), 3000);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [stage]);
 
   const handleClick = () => {
     if (stage === 0) {
@@ -154,31 +138,68 @@ const Surprise = () => {
     <div className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${
       isLit ? 'bg-gradient-to-br from-purple-50 via-purple-200 to-purple-400' : 'bg-gray-900'
     }`}>
-      {/* All decorative elements remain exactly the same */}
+      {/* STAR FIELD - FULLY PRESERVED */}
       <StarryNight />
+      
+      {/* FLOATING HEARTS - FULLY PRESERVED */}
       {isLit && <FloatingHearts />}
 
-      {/* Confetti effects remain */}
+      {/* CONFETTI - FULLY PRESERVED */}
       {showConfetti && (
         <div className="absolute inset-0 pointer-events-none">
-          {/* ... existing confetti code ... */}
+          {[...Array(200)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full"
+              initial={{ 
+                y: -10,
+                x: Math.random() * 100 + 'vw',
+                opacity: 1,
+                scale: Math.random() + 0.5
+              }}
+              animate={{
+                y: '100vh',
+                x: Math.random() * 100 - 50 + 'vw',
+                opacity: 0,
+                rotate: 360
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                ease: "easeIn"
+              }}
+              style={{
+                backgroundColor: ['#a855f7', '#9333ea', '#c084fc', '#d8b4fe', '#f472b6'][i % 5]
+              }}
+            />
+          ))}
         </div>
       )}
 
-      {cakeCutConfetti && (
-        <div className="absolute inset-0 pointer-events-none">
-          {/* ... cake cut confetti code ... */}
-        </div>
-      )}
-
-      {/* All existing decorative elements remain */}
+      {/* DECORATIVE LIGHTS - FULLY PRESERVED */}
       {isLit && (
         <div className="absolute top-4 left-0 right-0 flex justify-around">
-          {/* ... existing decorative lights ... */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-4 h-4 rounded-full"
+              style={{
+                backgroundColor: ['#a855f7', '#9333ea', '#c084fc', '#d8b4fe'][i % 4],
+              }}
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3
+              }}
+            />
+          ))}
         </div>
       )}
 
-      {/* Banner remains */}
+      {/* BANNER - FULLY PRESERVED */}
       {stage >= 3 && (
         <motion.div
           initial={{ y: -100, opacity: 0 }}
@@ -194,62 +215,80 @@ const Surprise = () => {
         </motion.div>
       )}
 
-      {/* Balloons remain */}
+      {/* BALLOONS - FULLY PRESERVED */}
       {stage >= 4 && (
         <div className="absolute inset-0 pointer-events-none">
-          {/* ... existing balloons code ... */}
+          {[...Array(25)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              initial={{ bottom: '-10vh', left: `${Math.random() * 100}vw` }}
+              animate={{
+                bottom: '120vh',
+                left: `${Math.random() * 100}vw`,
+              }}
+              transition={{
+                duration: 15 + Math.random() * 10,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            >
+              <motion.div
+                className="w-6 md:w-8 h-8 md:h-12 rounded-t-full"
+                style={{
+                  backgroundColor: ['#c084fc', '#a78bfa', '#d8b4fe', '#e9d5ff', '#f472b6'][i % 5],
+                }}
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 2 + Math.random() * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <div className="w-0.5 h-12 md:h-16 bg-gray-400 mx-auto" />
+            </motion.div>
+          ))}
         </div>
       )}
 
-      {/* Cake Section - Removed knife but kept cut effect */}
-      {stage >= 5 && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="absolute flex justify-center items-center w-full"
-          style={{ top: '50%' }}
-        >
-          <div className="relative">
-            <img
-              src={CatCake}
-              className={`w-full max-w-xs md:max-w-md h-auto mt-10 pt-10 rounded-lg shadow-xl border-4 border-white transition-all duration-500 ${
-                isCakeCut ? 'opacity-80 grayscale-[20%]' : 'opacity-100'
-              }`}
-              alt="Cat Cake"
-            />
-            
-            {isCakeCut && (
-              <>
-                <motion.div 
-                  className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-lg"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                />
-                <motion.div 
-                  className="absolute top-1/2 left-1/2 w-1 h-32 bg-white"
-                  initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-              </>
-            )}
-          </div>
-        </motion.div>
-      )}
-
-      {/* Photos remain */}
+      {/* PHOTOS - FULLY PRESERVED */}
       {showPhotos && (
         <div className="absolute inset-0 flex justify-center items-center gap-4 pointer-events-none">
-          {/* ... existing photos code ... */}
+          <motion.img
+            src={Photo1}
+            className="w-24 h-24 md:w-32 md:h-32 rounded-lg shadow-lg border-2 border-white"
+            alt="Memory"
+            initial={{ y: 100, opacity: 0, rotate: -10 }}
+            animate={{ y: 0, opacity: 1, rotate: -5 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+          <motion.img
+            src={Photo2}
+            className="w-32 h-32 md:w-40 md:h-40 rounded-lg shadow-lg border-2 border-white z-10"
+            alt="Memory"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          />
+          <motion.img
+            src={Photo1}
+            className="w-24 h-24 md:w-32 md:h-32 rounded-lg shadow-lg border-2 border-white"
+            alt="Memory"
+            initial={{ y: 100, opacity: 0, rotate: 10 }}
+            animate={{ y: 0, opacity: 1, rotate: 5 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          />
         </div>
       )}
 
+      {/* MUSIC PLAYER - FULLY PRESERVED */}
       <audio ref={audioRef} loop>
         <source src={Musicc} type="audio/mpeg" />
       </audio>
 
-      {/* Music indicator remains */}
+      {/* MUSIC ICON - FULLY PRESERVED */}
       {stage >= 2 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -260,7 +299,7 @@ const Surprise = () => {
         </motion.div>
       )}
 
-      {/* Button remains */}
+      {/* BUTTON - PRESERVED (UPDATED LABELS ONLY) */}
       <div className="absolute inset-x-0 bottom-10 flex justify-center items-center px-4 py-4">
         <motion.button
           onClick={handleClick}
