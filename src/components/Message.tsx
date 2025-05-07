@@ -1,12 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Sparkles, Gift, ChevronDown, Star, Moon, Sun } from 'lucide-react';
+import { Heart, Sparkles, Gift, ChevronDown, Star, Moon, Sun, Volume2, VolumeX } from 'lucide-react';
 
 const Message = () => {
   const [showSurprise, setShowSurprise] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [showButterflies, setShowButterflies] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio when component mounts
+  useEffect(() => {
+    audioRef.current = new Audio('/music.mp3'); // Make sure to place your music file in public folder
+    audioRef.current.loop = true;
+    
+    // Attempt to autoplay (may be blocked by browser)
+    const playPromise = audioRef.current.play();
+    
+    if (playPromise !== undefined) {
+      playPromise
+        .then(_ => setIsMuted(false))
+        .catch(error => {
+          console.log("Autoplay prevented:", error);
+          setIsMuted(true);
+        });
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+      setIsMuted(!isMuted);
+    }
+  };
 
   const handleButtonClick = () => {
     setShowSurprise(true);
@@ -78,6 +116,17 @@ const Message = () => {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&family=Great+Vibes&family=Montserrat&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap');
       `}</style>
+
+      {/* Music control button */}
+      <motion.button
+        onClick={toggleMute}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:shadow-purple-500/30"
+        aria-label={isMuted ? "Unmute music" : "Mute music"}
+      >
+        {isMuted ? <VolumeX className="text-purple-600" /> : <Volume2 className="text-purple-600" />}
+      </motion.button>
 
       {/* Purple floral overlay */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/floral.png')] opacity-10 pointer-events-none" />
