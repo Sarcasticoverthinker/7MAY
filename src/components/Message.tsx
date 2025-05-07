@@ -24,6 +24,54 @@ const Message = () => {
     elegant: "font-['Cormorant_Garamond'] font-medium italic"
   };
 
+  // Optimized butterfly component
+  const Butterfly = ({ index }: { index: number }) => {
+    const duration = 15 + Math.random() * 5;
+    const delay = Math.random() * 5;
+    const xStart = Math.random() * 100;
+    const xEnd = xStart + (Math.random() * 20 - 10);
+    
+    return (
+      <motion.div
+        className="absolute"
+        initial={{ 
+          y: '110vh', 
+          x: `${xStart}vw`,
+          opacity: 0,
+        }}
+        animate={{
+          y: '-10vh',
+          x: `${xEnd}vw`,
+          opacity: [0, 1, 1, 0],
+        }}
+        transition={{
+          duration,
+          repeat: Infinity,
+          ease: 'linear',
+          delay,
+        }}
+        style={{
+          willChange: 'transform, opacity',
+        }}
+      >
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{
+            duration: 1 + Math.random(),
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className={`text-2xl ${index % 2 === 0 ? 'text-purple-400' : 'text-pink-300'}`}
+        >
+          🦋
+        </motion.div>
+      </motion.div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-purple-200 to-purple-500 flex items-center justify-center p-6 relative overflow-hidden">
       {/* Load fonts */}
@@ -38,111 +86,90 @@ const Message = () => {
       <AnimatePresence>  
         {showHearts && (  
           <div className="absolute inset-0 pointer-events-none">  
-            {[...Array(15)].map((_, i) => (  
-              <motion.div  
-                key={`heart-${i}`}  
-                className="absolute"  
-                initial={{   
-                  y: '100vh',   
-                  x: Math.random() * 100 + 'vw',  
-                  opacity: 0,  
-                  rotate: Math.random() * 360  
-                }}  
-                animate={{  
-                  y: '-10vh',  
-                  x: Math.random() * 20 - 10 + 'vw',  
-                  opacity: [0, 1, 1, 0],  
-                  rotate: 360 + Math.random() * 360,  
-                }}  
-                transition={{  
-                  duration: Math.random() * 15 + 10,  
-                  repeat: Infinity,  
-                  ease: 'linear',  
-                  delay: Math.random() * 5  
-                }}  
-              >  
-                <Heart   
-                  className={i % 3 === 0 ? "text-pink-400" :   
-                            i % 2 === 0 ? "text-purple-300" : "text-red-400"}   
-                  size={Math.random() * 24 + 16}   
-                />  
-              </motion.div>  
-            ))}  
+            {[...Array(10)].map((_, i) => {
+              const duration = 15 + Math.random() * 5;
+              const delay = Math.random() * 5;
+              const xStart = Math.random() * 100;
+              const xEnd = xStart + (Math.random() * 20 - 10);
+              
+              return (
+                <motion.div  
+                  key={`heart-${i}`}  
+                  className="absolute"  
+                  initial={{   
+                    y: '100vh',   
+                    x: `${xStart}vw`,  
+                    opacity: 0,  
+                  }}  
+                  animate={{  
+                    y: '-10vh',  
+                    x: `${xEnd}vw`,  
+                    opacity: [0, 1, 1, 0],  
+                  }}  
+                  transition={{  
+                    duration,
+                    repeat: Infinity,  
+                    ease: 'linear',  
+                    delay,
+                  }}  
+                  style={{
+                    willChange: 'transform, opacity',
+                  }}
+                >  
+                  <Heart   
+                    className={i % 3 === 0 ? "text-pink-400" :  
+                              i % 2 === 0 ? "text-purple-300" : "text-red-400"}   
+                    size={Math.random() * 20 + 12}   
+                  />  
+                </motion.div>  
+              );
+            })}  
           </div>  
         )}  
 
         {showButterflies && (
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={`butterfly-${i}`}
-                className="absolute"
-                initial={{ 
-                  y: '100vh', 
-                  x: Math.random() * 100 + 'vw',
-                  opacity: 0,
-                  rotate: Math.random() * 360
-                }}
-                animate={{
-                  y: '-10vh',
-                  x: Math.random() * 20 - 10 + 'vw',
-                  opacity: [0, 1, 1, 0],
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: Math.random() * 15 + 10,
-                  repeat: Infinity,
-                  ease: 'linear',
-                  delay: Math.random() * 5
-                }}
-              >
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    y: [0, -5, 0]
-                  }}
-                  transition={{
-                    duration: 1 + Math.random(),
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className={`text-3xl ${i % 2 === 0 ? 'text-purple-400' : 'text-pink-300'}`}
-                >
-                  🦋
-                </motion.div>
-              </motion.div>
+            {[...Array(8)].map((_, i) => (
+              <Butterfly key={`butterfly-${i}`} index={i} />
             ))}
           </div>
         )}
 
         {showStars && (
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(50)].map((_, i) => (
-              <motion.div
-                key={`star-${i}`}
-                className="absolute"
-                initial={{
-                  y: Math.random() * 100 + 'vh',
-                  x: Math.random() * 100 + 'vw',
-                  opacity: 0,
-                  scale: 0
-                }}
-                animate={{
-                  y: Math.random() * 100 + 'vh',
-                  x: Math.random() * 100 + 'vw',
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                  rotate: 360
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 5,
-                  repeat: Infinity,
-                  delay: Math.random() * 3
-                }}
-              >
-                <Star className="text-yellow-300" size={Math.random() * 12 + 8} />
-              </motion.div>
-            ))}
+            {[...Array(20)].map((_, i) => {
+              const duration = 3 + Math.random() * 5;
+              const delay = Math.random() * 3;
+              const yPos = Math.random() * 100;
+              const xPos = Math.random() * 100;
+              
+              return (
+                <motion.div
+                  key={`star-${i}`}
+                  className="absolute"
+                  initial={{
+                    y: `${yPos}vh`,
+                    x: `${xPos}vw`,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    y: `${yPos}vh`,
+                    x: `${xPos}vw`,
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration,
+                    repeat: Infinity,
+                    delay
+                  }}
+                  style={{
+                    willChange: 'transform, opacity',
+                  }}
+                >
+                  <Star className="text-yellow-300" size={Math.random() * 10 + 6} />
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </AnimatePresence>  
@@ -200,7 +227,7 @@ const Message = () => {
           className="text-lg md:text-xl text-purple-900 leading-relaxed mb-8"  
         >  
           On this special day, I just want to say I'm so lucky to have met you. I want you to know that how incredibly grateful I am to have you in my life. I pray that your days, weeks, months, and years ahead are filled with barakah, warmth, love, and the kind of happiness that brings peace to your heart.
-          </motion.p>  
+        </motion.p>  
 
         <AnimatePresence mode="wait">  
           {!showSurprise ? (  
@@ -233,7 +260,7 @@ const Message = () => {
                 className={`mt-6 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-400 hover:from-purple-600 hover:to-pink-500 text-white rounded-full text-lg shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center gap-3 mx-auto ${fonts.body} font-semibold`}  
               >  
                 <Gift size={24} className="text-yellow-200" />  
-                Message from an Idiot  
+                A Little Heartfelt Note
                 <ChevronDown size={20} className="animate-bounce text-purple-100" />  
               </motion.button>  
             </>  
