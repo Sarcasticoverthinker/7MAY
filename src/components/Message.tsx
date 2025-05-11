@@ -12,7 +12,7 @@ const Message = () => {
 
   // Initialize audio when component mounts
   useEffect(() => {
-    audioRef.current = new Audio('/music.mp3'); // Make sure to place your music file in public folder
+    audioRef.current = new Audio('./music.mp3'); // Make sure to place your music file in public folder
     audioRef.current.loop = true;
     
     // Attempt to autoplay (may be blocked by browser)
