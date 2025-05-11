@@ -8,37 +8,53 @@ const Message = () => {
   const [showStars, setShowStars] = useState(false);
   const [showButterflies, setShowButterflies] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [audioReady, setAudioReady] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize audio when component mounts
   useEffect(() => {
-    audioRef.current = new Audio('./music.mp3'); // Make sure to place your music file in public folder
+    // Create audio element with correct path for GitHub Pages
+    audioRef.current = new Audio(`${process.env.PUBLIC_URL}/music.mp3`);
     audioRef.current.loop = true;
     
-    // Attempt to autoplay (may be blocked by browser)
-    const playPromise = audioRef.current.play();
-    
-    if (playPromise !== undefined) {
-      playPromise
-        .then(_ => setIsMuted(false))
-        .catch(error => {
-          console.log("Autoplay prevented:", error);
-          setIsMuted(true);
-        });
-    }
+    // For better mobile compatibility, we'll wait for user interaction
+    const handleFirstInteraction = () => {
+      if (audioRef.current && isMuted) {
+        const playPromise = audioRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(_ => {
+              setIsMuted(false);
+              setAudioReady(true);
+            })
+            .catch(error => {
+              console.log("Playback prevented:", error);
+              setAudioReady(true);
+            });
+        }
+      }
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+    };
+
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
 
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
     };
   }, []);
 
   const toggleMute = () => {
     if (audioRef.current) {
       if (isMuted) {
-        audioRef.current.play();
+        audioRef.current.play().catch(e => console.log("Playback failed:", e));
       } else {
         audioRef.current.pause();
       }
@@ -117,16 +133,21 @@ const Message = () => {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&family=Great+Vibes&family=Montserrat&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap');
       `}</style>
 
-      {/* Music control button */}
-      <motion.button
-        onClick={toggleMute}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:shadow-purple-500/30"
-        aria-label={isMuted ? "Unmute music" : "Mute music"}
-      >
-        {isMuted ? <VolumeX className="text-purple-600" /> : <Volume2 className="text-purple-600" />}
-      </motion.button>
+      {/* Music control button - only show if audio is ready */}
+      {audioReady && (
+        <motion.button
+          onClick={toggleMute}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="absolute top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:shadow-purple-500/30"
+          aria-label={isMuted ? "Unmute music" : "Mute music"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          {isMuted ? <VolumeX className="text-purple-600" /> : <Volume2 className="text-purple-600" />}
+        </motion.button>
+      )}
 
       {/* Purple floral overlay */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/floral.png')] opacity-10 pointer-events-none" />
